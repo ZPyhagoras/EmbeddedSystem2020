@@ -63,20 +63,19 @@ int main (int argc, char *argv[])
 	Method 2
 	*/
 	sleep(1);
-	
+
 	/*
 	Method 3
 	sem_wait(&sem[5]);
 	*/
-
 	printf("in main: exit!\n");
 	pthread_exit(NULL);
-	
 	/*
 	Method 3
 	for (i = 0; i < 6; i++) {
 		sem_destroy(&sem[i]);
 	}
 	*/
+
 	return (0);
 }
