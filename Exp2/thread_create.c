@@ -58,10 +58,12 @@ int main (int argc, char *argv[])
 		pthread_join(tid[i], &status);
 	}
 	*/
+
 	/*
 	Method 2
 	*/
 	sleep(1);
+	
 	/*
 	Method 3
 	sem_wait(&sem[5]);
