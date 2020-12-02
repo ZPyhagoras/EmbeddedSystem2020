@@ -31,6 +31,7 @@ sem_t	write_sem;
 
 void  *thread_read_function (void  *arg)
 {
+	printf("read start\n");
 	while(1) {
 		sem_wait(&read_sem);
 	   	nread = read(fd_tty, buff, 255);
@@ -44,7 +45,6 @@ void  *thread_read_function (void  *arg)
 			exit(-1);
 		}
 		sem_post(&write_sem);
-		sem_post(&read_sem);
 	}
 
    pthread_exit(NULL);
@@ -53,19 +53,17 @@ void  *thread_read_function (void  *arg)
 
 void  *thread_write_function (void  *arg)
 {
-
+	printf("write start\n");
 	while(1) {
 		sem_wait(&write_sem);
-		sem_wait(&read_sem);
 		if (nread > 0) {
-			nwrite = write(fd_tty, buff, 255);
+			nwrite = write(fd_tty, buff, nread);
 		}
 		if (nwrite == -1) {
 			printf("write error\n");
 			exit(-1);
 		}
 		sem_post(&read_sem);
-		sem_post(&write_sem);
 	}
 
    pthread_exit(NULL);
@@ -232,5 +230,6 @@ int main (int  argc, char  *argv[])
 	sem_destroy(&read_sem);
 	sem_destroy(&write_sem);
 
+	close(fd_tty);
     return 0;
 }

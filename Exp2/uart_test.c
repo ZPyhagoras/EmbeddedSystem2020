@@ -181,6 +181,7 @@ int  main (int  argc, char  *argv[])
 	//Todo：设置串口波特率
 	ret = set_speed(fd_tty, new_speed);
 	if (ret != 0) {
+		printf("set speed error\n");
 		close(fd_tty);
 		return  (-1);
 	}
@@ -188,6 +189,7 @@ int  main (int  argc, char  *argv[])
 	//Todo：  数据位 8，停止位 1，无校验('n'无校验,'o'奇校验,'e'偶校验)
 	ret = set_parity(fd_tty, 8, 1, 'n');
 	if (ret != 0) {
+		printf("set parity error\n");
 		close(fd_tty);
 		return  (-1);
 	}
@@ -199,7 +201,7 @@ int  main (int  argc, char  *argv[])
 		nread = read(fd_tty, buff, 255);
 		//Todo：将接收的数据通过原串口输出
 		if (nread > 0) {
-			nwrite = write(fd_tty, buff, 255);
+			nwrite = write(fd_tty, buff, nread);
 			if (nwrite == -1) {
 				printf("write error\n");
 			}

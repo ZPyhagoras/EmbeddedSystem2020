@@ -60,8 +60,8 @@ int main (int argc, char *argv[])
 	*/
 	/*
 	Method 2
-	sleep(1);
 	*/
+	sleep(1);
 	/*
 	Method 3
 	sem_wait(&sem[5]);
