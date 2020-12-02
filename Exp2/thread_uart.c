@@ -1,9 +1,12 @@
 /*
  * thread_uart.c
  *
- *  Created on: 2015-11-11
- *      Author: qi
- */
+ * Created on: 2015-11-11
+ * Author: qi
+ * Modified on: 2020-11-29
+ * Author: Zhang Qiyang
+ * StudentID: PT2000186
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,6 +19,7 @@
 #include <errno.h>
 #include <string.h>
 #include <semaphore.h>
+#include <sys/sem.h>
 
 int		ret;
 int		nread;
@@ -196,14 +200,14 @@ int main (int  argc, char  *argv[])
 	}
 
 	 //Todo：设置串口波特率
-	set_speed(fd_tty, new_speed);
+	ret = set_speed(fd_tty, new_speed);
 	if (ret != 0) {
 		close(fd_tty);
 		return  (-1);
 	}
 
 	//Todo：设置串口参数
-	set_parity(fd_tty, 8, 1, 'n');
+	ret = set_parity(fd_tty, 8, 1, 'n');
 	if (ret != 0) {
 		close(fd_tty);
 		return  (-1);

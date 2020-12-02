@@ -1,3 +1,12 @@
+/*
+ * uart_test.c
+ *
+ * Created on: ????-??-??
+ * Author: ???
+ * Modified on: 2020-11-29
+ * Author: Zhang Qiyang
+ * StudentID: PT2000186
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -170,14 +179,14 @@ int  main (int  argc, char  *argv[])
 	}
 	
 	//Todo：设置串口波特率
-	set_speed(fd_tty, new_speed);
+	ret = set_speed(fd_tty, new_speed);
 	if (ret != 0) {
 		close(fd_tty);
 		return  (-1);
 	}
 
 	//Todo：  数据位 8，停止位 1，无校验('n'无校验,'o'奇校验,'e'偶校验)
-	set_parity(fd_tty, 8, 1, 'n');
+	ret = set_parity(fd_tty, 8, 1, 'n');
 	if (ret != 0) {
 		close(fd_tty);
 		return  (-1);
